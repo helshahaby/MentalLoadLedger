@@ -10,10 +10,10 @@ weekly_recap() gives a spoken summary of the week.
 Run it:
 
 bash
-python -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt
-python server.py            # endpoint: https://turf-riverbank-passably.ngrok-free.dev/mcp
-python test_client.py       # in a second terminal
+python -m venv .venv && source .venv/bin/activate /
+pip install -r requirements.txt /
+python server.py            # endpoint: https://turf-riverbank-passably.ngrok-free.dev/mcp /
+python test_client.py       # in a second terminal /
 
 
 ## Inspiration
