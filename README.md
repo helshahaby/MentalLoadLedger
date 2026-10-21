@@ -1,6 +1,9 @@
 ## The idea: 
 Households tend to split visible chores fairly but not the invisible work, like booking the dentist, planning meals, or remembering birthdays. You tell Alexa+ what got done (“Sam booked the dentist, that was planning work”). The server keeps a weighted ledger, where invisible work counts 1.5×. It can then say who is carrying how much and suggest a specific task to hand off.
 
+## Demo Link:
+https://youtu.be/CsaNP4L51Lg \
+
 ## Tools (replies are short enough to be spoken):
 
 log_task(who, task, effort, invisible) records a task.
