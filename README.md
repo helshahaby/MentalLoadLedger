@@ -1,19 +1,20 @@
-The idea: Households tend to split visible chores fairly but not the invisible work, like booking the dentist, planning meals, or remembering birthdays. You tell Alexa+ what got done (“Sam booked the dentist, that was planning work”). The server keeps a weighted ledger, where invisible work counts 1.5×. It can then say who is carrying how much and suggest a specific task to hand off.
+## The idea: 
+Households tend to split visible chores fairly but not the invisible work, like booking the dentist, planning meals, or remembering birthdays. You tell Alexa+ what got done (“Sam booked the dentist, that was planning work”). The server keeps a weighted ledger, where invisible work counts 1.5×. It can then say who is carrying how much and suggest a specific task to hand off.
 
-Tools (replies are short enough to be spoken):
+## Tools (replies are short enough to be spoken):
 
 log_task(who, task, effort, invisible) records a task.
 get_balance(days) returns each person’s share and says whether the split is fair.
 suggest_handoff() picks the task the busiest person does most and proposes giving it to the lightest-loaded person.
 weekly_recap() gives a spoken summary of the week.
 
-Run it:
+## Run it:
 
 bash
-python -m venv .venv && source .venv/bin/activate /
-pip install -r requirements.txt /
-python server.py            # endpoint: https://turf-riverbank-passably.ngrok-free.dev/mcp /
-python test_client.py       # in a second terminal /
+python -m venv .venv && source .venv/bin/activate \
+pip install -r requirements.txt \
+python server.py            # endpoint: https://turf-riverbank-passably.ngrok-free.dev/mcp \
+python test_client.py       # in a second terminal \
 
 
 ## Inspiration
@@ -65,14 +66,14 @@ def log_task(who: str, task: str, effort: int = 2, invisible: bool = False,
     ...
 ```
 
-## Challenges we ran into
+## Challenges I ran into
 
 - **SDK version drift.** The MCP Python SDK recently shipped a 2.x release that renamed `FastMCP` and changed the client APIs. Our code failed on a fresh install until we pinned `mcp>=1.23,<2` and verified against 1.30.
 - **Defining "fair".** A pure task count punishes people who do a few heavy jobs, and a pure effort score ignores invisible work. The weighted score and the 10% tolerance band was our compromise. It's a starting point, not a verdict, and the weights are easy to tune.
 - **Writing for the ear.** A response that reads fine on screen can sound awkward spoken aloud. We kept every reply to one or two short sentences with the key number up front.
 - **Identity.** MCP sessions don't tell us which person is speaking, so the user names who did the task. Per-user voice profiles would be the natural next step.
 
-## What we learned
+## What I learned
 
 - How MCP tools, schemas and docstrings shape how an assistant decides what to call and what to say.
 - Why the Streamable HTTP transport suits a hosted, multi-session server.
